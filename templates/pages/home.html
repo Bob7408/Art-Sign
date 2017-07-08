@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h1>Art'Sign</h1>
+<a href="{% url 'about' %}">Qui sommes-nous ?</a>
+<a href="{% url 'event-list' %}">Agenda</a>
+<a href="{% url 'article-list' %}">Billets</a>
+
+
+<h2>Prochainement...</h2>
+<ul>
+    {% for event in next_events %}
+        <li><a href="{% url 'event-detail' pk=event.pk %}">{{ event.title }}</a>, le {{ event.date }} à {{ event.place }}- {{ event.description }}</li>
+    {% empty %}
+        <li>Pas d'événement à venir pour le moment !</li>
+    {% endfor %}
+</ul>
+
+<h2>Derniers billets</h2>
+<ul>
+    {% for article in last_articles %}
+        <li><a href="{% url 'article-detail' pk=article.pk %}">{{ article.title }}</a></li>
+    {% empty %}
+        <li>Pas d'article pour le moment !</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock content %}
