@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from Art_Sign.agenda.models import Event
 from Art_Sign.article.models import Article
+from Art_Sign.pages.forms import ParticipateForm
 
 
 def home(request):
@@ -56,4 +57,12 @@ def outings(request):
 
 
 def participate(request):
-    return render(request, 'pages/participate.html')
+    if request.method == 'POST':
+        form = ParticipateForm(request.POST)
+        if form.is_valid():
+            #TO DO
+            return
+    else:
+        form = ParticipateForm()
+
+    return render(request, 'pages/participate.html', {'form': ParticipateForm})
